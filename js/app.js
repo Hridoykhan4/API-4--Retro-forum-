@@ -74,3 +74,46 @@ const showDeTails = (title, viewCount) => {
 };
 
 allPosts();
+
+
+const latestPosts = async() => {
+    const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
+    const data = await res.json();
+    showLatestPosts(data)
+}
+
+const showLatestPosts = (posts) => {
+    const latestCardContainer = document.getElementById('latestCardContainer');
+    posts.forEach((post) => {
+        const div = document.createElement('div');
+        div.classList = `card bg-base-100  shadow-xl`;
+        div.innerHTML = `
+        <figure>
+              <img
+                src="${post.cover_image}"
+                alt="Shoes" />
+            </figure>
+
+            <div class="card-body">
+              <h2 class="card-title"><i class="fa-regular fa-calendar"></i><span>${post?.author?.posted_date ? post.author.posted_date : 'Not Published Yet'}</span></h2>
+              <p class="font-semibold">${post.title}</p>
+
+              <p>${post.description}</p>
+
+              <div class="flex gap-2">
+                <div class="w-12 rounded-full">
+                  <img class="w-full rounded-full" src="${post.profile_image}" alt="">
+                </div>
+                <div>
+                    <h3 class="font-bold tracking-wide">${post.author.name}</h3>
+                    <small>${post?.author?.designation ? post?.author?.designation : 'Not Given'}</small>
+                </div>
+              </div>
+            </div>
+        
+        `
+        latestCardContainer.appendChild(div)
+    })
+}
+
+latestPosts()
