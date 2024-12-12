@@ -45,7 +45,7 @@
           <div class="flex-1">
             <a class="btn btn-ghost font-bold text-xl">Pro Learner ➕</a>
           </div>
-          <div class="flex gap-6 items-center">
+          <div class="md:flex gap-6 items-center hidden">
             <div class="tooltip" data-tip="Home">
               <i class="fa-solid fa-house bg-gray-100 p-2 rounded-full"></i>
             </div>
@@ -84,12 +84,14 @@
             </p>
 
             <div class="flex items-center">
-              <input id="searchField"
+              <input
+                id="searchField"
                 type="text"
                 class="py-3 rounded-l-3xl text-black px-2"
                 placeholder="Search category here"
               />
-              <button onclick="searchPost()"
+              <button
+                onclick="searchPost()"
                 class="bg-[#797DFC] py-3 btn rounded-l-none text-white rounded-r-full"
               >
                 Search
@@ -99,7 +101,7 @@
 
           <div class="flex-1">
             <div
-              class="card card-side w-3/4 py-10 me-auto text-black bg-base-100 shadow-xl"
+              class="card card-side md:w-3/4 py-10 me-auto text-black bg-base-100 shadow-xl"
             >
               <div class="card-body">
                 <div class="flex justify-between">
@@ -163,7 +165,7 @@
 
       <section class="my-12">
         <div
-          class="bg-[url(./images/bgbanner.png)] md:px-20 py-28 bg-[#12132D] text-white flex items-center justify-center bg-cover rounded-lg"
+          class="bg-[url(./images/bgbanner.png)] px-4 gap-4 md:px-20 py-28 bg-[#12132D] text-white flex-col md:flex-row flex items-center justify-center bg-cover rounded-lg"
         >
           <div class="flex-1 space-y-5">
             <h3 class="text-2xl font-black">Join Our Forum</h3>

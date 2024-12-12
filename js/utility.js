@@ -1,33 +1,33 @@
 const toggleSpinner = (isLoading) => {
-    const toggleSpinner = document.getElementById('spinnerToggle');
-    if(isLoading){
-        toggleSpinner.classList.remove('hidden')
-    }else{
-        toggleSpinner.classList.add('hidden')
-
-    }
-}
-
+  const toggleSpinner = document.getElementById("spinnerToggle");
+  if (isLoading) {
+    toggleSpinner.classList.remove("hidden");
+  } else {
+    toggleSpinner.classList.add("hidden");
+  }
+};
 
 const searchPost = () => {
-    toggleSpinner(true)
-    const searchField = document.getElementById('searchField');
-    const searchValue = searchField.value;
-    categoryByName(searchValue)
-}
+  toggleSpinner(true);
+  const searchField = document.getElementById("searchField");
+  const searchValue = searchField.value;
+  categoryByName(searchValue);
+};
 
-const categoryByName = async(categoryName) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${categoryName}`);
-    const data = await res.json();
+const categoryByName = async (categoryName) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/retro-forum/posts?category=${categoryName}`
+  );
+  const data = await res.json();
 
-    const showDocs = document.getElementById('show-docs');
-    showDocs.innerText = '';
+  const showDocs = document.getElementById("show-docs");
+  showDocs.innerText = "";
 
-    data.posts.forEach((post => {
-        const div = document.createElement('div');
-        div.classList = 'flex gap-3 bg-[#797DFC1A] p-4';
+  data.posts.forEach((post) => {
+    const div = document.createElement("div");
+    div.classList = "flex gap-3 bg-[#797DFC1A] p-4";
 
-        div.innerHTML = `
+    div.innerHTML = `
             <img class="w-20 h-20" src="${post.image}" alt="Post Image">
 
             <div class="space-y-3">
@@ -70,8 +70,7 @@ const categoryByName = async(categoryName) => {
             </div>
         `;
 
-        showDocs.appendChild(div);
-    }))
-    toggleSpinner(false)
-}
-
+    showDocs.appendChild(div);
+  });
+  toggleSpinner(false);
+};
