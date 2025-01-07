@@ -1,12 +1,3 @@
-const toggleSpinner = (isLoading) => {
-  const toggleSpinner = document.getElementById("spinnerToggle");
-  if (isLoading) {
-    toggleSpinner.classList.remove("hidden");
-  } else {
-    toggleSpinner.classList.add("hidden");
-  }
-};
-
 const searchPost = () => {
   toggleSpinner(true);
   const searchField = document.getElementById("searchField");
@@ -64,7 +55,7 @@ const categoryByName = async (categoryName) => {
                     <button 
                         onclick="showDeTails('${post.title}', ${post.view_count})" 
                         class="flex bg-green-300 p-3 rounded-full text-white items-center gap-2 ms-auto">
-                        <i class="fa-solid fa-envelope"></i>
+                        <i class="fa-solid btn btn-primary fa-envelope"></i>
                     </button>
                 </div>
             </div>
@@ -72,5 +63,4 @@ const categoryByName = async (categoryName) => {
 
     showDocs.appendChild(div);
   });
-  toggleSpinner(false);
 };

@@ -1,4 +1,14 @@
+const toggleSpinner = (isLoading) => {
+  const toggleSpinner = document.getElementById("spinnerToggle");
+  if (isLoading) {
+    toggleSpinner.classList.remove("hidden");
+  } else {
+    toggleSpinner.classList.add("hidden");
+  }
+};
+
 const allPosts = async () => {
+  toggleSpinner(true);
   const res = await fetch(
     "https://openapi.programming-hero.com/api/retro-forum/posts"
   );
@@ -17,10 +27,11 @@ const showAllPosts = (postInfo) => {
 
     div.innerHTML = `
           <div class="relative">
-           <i class="fa-solid fa-circle absolute left-0 ${
+           <i class="fa-solid fa-circle absolute -left-2 -top-1 ${
              post.isActive ? "text-green-500" : "text-red-500"
            }">
            </i>
+           <img class="w-16 h-16 object-cover rounded-lg" src="${post.image}">
        </div>
 
             <div class="space-y-3">
@@ -41,7 +52,7 @@ const showAllPosts = (postInfo) => {
                 </div>
 
                 <p class="font-bold">${post.title}</p>
-                <p class="font-semibold">${post.description}</p>
+                <p class="font-semibold ">${post.description}</p>
 
                 <hr class="my-5 border-black border-dashed">
 
@@ -58,10 +69,10 @@ const showAllPosts = (postInfo) => {
                         <i class="fa-regular fa-clock"></i>
                         <p>${post.posted_time}</p>
                     </div>
-                    <button 
+                    <button id="btn-${post.id}" class="btn btn-primary"
                         onclick="showDeTails('${post.title}', ${
       post.view_count
-    })" 
+    }, ${post.id})" 
                         class="flex bg-green-300 p-3 rounded-full text-white items-center gap-2 ms-auto">
                         <i class="fa-solid fa-envelope"></i>
                     </button>
@@ -71,19 +82,27 @@ const showAllPosts = (postInfo) => {
 
     showDocs.appendChild(div);
   });
+  toggleSpinner(false);
 };
 
-const showDeTails = (title, viewCount) => {
-  const dynamicItTextElement = document.getElementById("dynamicIt");
-  const dynamicText = parseInt(dynamicItTextElement.innerText);
-  dynamicItTextElement.innerText = dynamicText + 1;
-  const infoHolder = document.getElementById("info-holder");
-  const p = document.createElement("p");
-  p.innerHTML = `
-        <strong>Title:</strong> ${title}<br>
-        <strong>View Count:</strong> <i class="fa-solid fa-eye"></i> ${viewCount}
-    `;
-  infoHolder.appendChild(p);
+const showDeTails = (title, viewCount, id) => {
+  let countView = document.getElementById("mark-count");
+  const countParse = parseInt(countView.innerText);
+  countView.innerText = countParse + 1;
+
+  const activeBtn = document.getElementById(`btn-${id}`);
+  activeBtn.setAttribute("disabled", true);
+
+  const showSelected = document.getElementById("show-selected");
+  const div = document.createElement("div");
+  div.classList =
+    "flex bg-white my-3 text-black shadow-lg gap-3 py-3 font-semibold justify-between";
+  div.innerHTML = `
+    <p>Title: ${title}</p>
+    <p><strong>View Count:</strong> <i class="fa-solid fa-eye"></i> ${viewCount}</p>
+  `;
+
+  showSelected.appendChild(div);
 };
 
 allPosts();
